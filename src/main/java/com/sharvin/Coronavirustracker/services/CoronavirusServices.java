@@ -22,6 +22,10 @@ public class CoronavirusServices {
 
     private List<LocationData> allData = new ArrayList<>();
 
+    public List<LocationData> getAllData() {
+        return allData;
+    }
+
     @PostConstruct
     @Scheduled(cron = "* * 1 * * *")
     public void fetchData() throws IOException, InterruptedException {

@@ -1,0 +1,23 @@
+package com.sharvin.Coronavirustracker.controllers;
+
+import com.sharvin.Coronavirustracker.services.CoronavirusServices;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.*;
+import java.io.*;
+
+@Controller
+public class Home {
+
+    @Autowired
+    CoronavirusServices coronavirusServices;
+
+    @GetMapping("/")
+    public String home(Model model){
+        model.addAttribute("locationData", coronavirusServices.getAllData());
+        return "home";
+    }
+}
