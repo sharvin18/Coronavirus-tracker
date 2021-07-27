@@ -45,12 +45,17 @@ public class CoronavirusServices {
         for (CSVRecord record : records) {
 
             LocationData locationData = new LocationData();
+
+            if(record.get("Province/State").equals("")) continue;
             locationData.setState(record.get("Province/State"));
             locationData.setCountry(record.get("Country/Region"));
 
-            // Store the current dated cases only.
-            locationData.setCurrentTotalCases(Integer.parseInt(record.get(record.size()-1)));
-            System.out.println(locationData);
+            // Store the current dated and previous day cases only.
+            int latestCases = Integer.parseInt(record.get(record.size()-1));
+            int prevDayCases = Integer.parseInt(record.get(record.size()-2));
+            locationData.setCurrentTotalCases(latestCases);
+            locationData.setCurrentTotalCases(latestCases - prevDayCases);
+
             newStats.add(locationData);
         }
 

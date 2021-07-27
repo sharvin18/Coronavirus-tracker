@@ -1,5 +1,6 @@
 package com.sharvin.Coronavirustracker.controllers;
 
+import com.sharvin.Coronavirustracker.models.LocationData;
 import com.sharvin.Coronavirustracker.services.CoronavirusServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,17 @@ public class Home {
 
     @GetMapping("/")
     public String home(Model model){
-        model.addAttribute("locationData", coronavirusServices.getAllData());
+
+        List<LocationData> covidData = coronavirusServices.getAllData();
+
+        // Finding total cases over the world to display it on UI.
+        long totalCases = covidData.stream().mapToInt(stats -> stats.getCurrentTotalCases()).sum();
+        long totalNewCases = covidData.stream().mapToInt(stats -> stats.getDiff()).sum();
+
+        model.addAttribute("locationData", covidData);
+        model.addAttribute("totalCasesReported", totalCases);
+        model.addAttribute("totalNewCases", totalNewCases);
+
         return "home";
     }
 }

@@ -5,27 +5,39 @@
 <head>
     <title>Coronavirus Tracker</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" media="all"
-          href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
+    <div class="container">
+        <h1 style="padding-top: 20px">Coronavirus Tracker</h1>
+        <p>This application gives the status of daily coronavirus cases recorded globally</p>
+        <div class="jumbotron" style="padding-top:20px">
+            <h1 class="display-4" th:text="${totalCasesReported}">Hello, world!</h1>
+            <p class="lead">Total cases reported as of today.</p>
+            <hr class="my-4">
+            <p>
+                <span>New cases reported as of yesterday: </span>
+                <span th:text="${totalNewCases}"></span>
+            </p>
+        </div>
 
-    <h1>Coronavirus Tracker</h1>
 
-    <table>
-        <tr>
-            <th>State</th>
-            <th>Country</th>
-            <th>Total Cases Reported</th>
-        </tr>
-        <tr th:each="locationStats : ${locationData}">
-            <td th:text="${locationStats.state}">Not Avavilable</td>
-            <td th:text="${locationStats.country}">Not Avavilable</td>
-            <td th:text="${locationStats.currentTotalCases}">Not Avavilable</td>
-        </tr>
-    </table>
-
+        <table class="table">
+            <tr>
+                <th>State</th>
+                <th>Country</th>
+                <th>Total Cases Reported</th>
+                <th>Changes since last day</th>
+            </tr>
+            <tr th:each="locationStats : ${locationData}">
+                <td th:text="${locationStats.state}">Not Avavilable</td>
+                <td th:text="${locationStats.country}">Not Avavilable</td>
+                <td th:text="${locationStats.currentTotalCases}">Not Avavilable</td>
+                <td th:text="${locationStats.diff}">Not Avavilable</td>
+            </tr>
+        </table>
+    </div>
 </body>
 
 </html>

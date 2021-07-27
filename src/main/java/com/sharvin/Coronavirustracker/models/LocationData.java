@@ -9,6 +9,16 @@ public class LocationData {
     private String country;
     private int currentTotalCases;
 
+    public int getDiff() {
+        return diff;
+    }
+
+    public void setDiff(int diff) {
+        this.diff = diff;
+    }
+
+    private int diff;
+
     public String getState() {
         return state;
     }
