@@ -6,6 +6,6 @@ A Spring Boot Application to track Coronavirus cases
 git clone
 
 # Import it to your IDE
-# Let it get the dependencies
+# Let it load the dependencies
 # Run the application
 ```
